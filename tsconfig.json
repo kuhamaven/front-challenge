@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "strict": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "baseUrl": ".", // Base URL for resolving non-relative module names
+  },
+  "include": ["src"]
+}
