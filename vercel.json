@@ -4,8 +4,8 @@
       "source": "/(.*)", "destination": "/"
     },
     {
-      "source": "/api/:match*",
-      "destination": "https://digi-api.com/:match*"
+      "source": "*/api/:match*",
+      "destination": "https://digi-api.com/api/:match*"
     }
   ]
 }
