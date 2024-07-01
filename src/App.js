@@ -10,6 +10,8 @@ export default function App() {
         <BrowserRouter>
             <div>
                 <NavBar />
+            </div>
+            <div className={'App'}>
                 <Routes>
                     <Route path="/" element={<CharacterList />} />
                     <Route path="/details/:id" element={<CharacterDetails />} />

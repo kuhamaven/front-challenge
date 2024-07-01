@@ -1,0 +1,65 @@
+.card {
+    position: relative;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 6px 6px 4px rgba(0, 0, 0, .5);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    box-shadow: 6px 6px 4px rgba(0, 0, 0, .8);
+    z-index: 1;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/src/assets/holo.png');
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.4s ease;
+    border-radius: 12px;
+    pointer-events: none; /* Prevents overlay from blocking mouse events */
+    opacity: 0;
+    z-index: 2; /* Ensure overlay is above image */
+}
+
+.card:hover::after {
+    opacity: .3;
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin: 16px 0;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.card:hover img {
+    transform: translateY(-10px);
+}
+
+.card .link {
+    display: block;
+    padding: 16px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.card .link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}

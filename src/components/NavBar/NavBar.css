@@ -1,0 +1,23 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar-logo {
+    max-width: 40px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.navbar-title {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo-main {
+    max-width: 160px;
+    margin-right: 8px;
+}

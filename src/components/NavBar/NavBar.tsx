@@ -4,12 +4,9 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {useNavigate} from "react-router-dom"
-
+import './NavBar.css'
 var logo = require('../../assets/Ver1.png');
 var dotSprite = require('../../assets/Agumon_vpet_dmc.gif');
-
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function NavBar() {
     const navigate = useNavigate()
@@ -19,20 +16,20 @@ function NavBar() {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar classes={'navbar'} className={'navbar'} sx={{backgroundColor:'#376eff'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography variant="h6" sx={{flexGrow: 1, display: 'flex', alignItems: 'center'}}>
                         <img
                             src={dotSprite}
                             alt="Logo"
-                            style={{maxWidth: '40px', marginRight: '8px', cursor: 'pointer'}}
+                            className={'navbar-logo'}
                             onClick={handleLogoClick}
                         />
                         Digi-API
                     </Typography>
                     <Typography variant="h6" sx={{display: 'flex', alignItems: 'center', marginLeft: 'auto'}}>
-                        <img src={logo} alt="Logo" style={{maxWidth: '160px', marginRight: '8px'}}/>
+                        <img src={logo} alt="Logo" className={'navbar-logo-main'}/>
                     </Typography>
                 </Toolbar>
             </Container>
