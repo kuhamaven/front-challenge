@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "^/api/v1/:match*",
-      "destination": "https://digi-api.com/api/v1/:match*"
+      "source": "/api/v1/:path*",
+      "destination": "https://digi-api.com/api/v1/:path*"
+    },
+    {
+      "source": "/api/v1/:path*/",
+      "destination": "https://digi-api.com/api/v1/:path*/"
     },
     {
       "source": "/(.*)",
