@@ -12,3 +12,32 @@ export const fetchCharacterById = async (id: number) => {
     const response = await axios.get(`${API_URL}/digimon/${id}`);
     return response.data;
 };
+
+export const fetchAllAttributes = async () => {
+    return getAllValues("attribute")
+};
+
+export const fetchAllFields = async () => {
+    return getAllValues("field")
+};
+
+export const fetchAllLevels = async () => {
+    return getAllValues("level")
+};
+
+export const fetchAllTypes = async () => {
+    return getAllValues("type")
+};
+
+const getAllValues = async(address: string) => {
+    let results: string[] = [];
+    let nextPage = `${API_URL}/${address}`;
+
+    while (nextPage) {
+        const response = await axios.get(nextPage);
+        results = [...results, ...response.data.content.fields.map((r: { name: string }) => r.name)];
+        nextPage = response.data.pageable.nextPage;
+    }
+
+    return results;
+}
