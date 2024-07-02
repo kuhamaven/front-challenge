@@ -21,3 +21,9 @@
     max-width: 160px;
     margin-right: 8px;
 }
+
+.navbar-child {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}

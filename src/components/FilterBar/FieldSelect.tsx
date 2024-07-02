@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import { fetchAllFields } from '../../services/api';
 
-const FieldSelect = () => {
+type FieldSelectProps = {
+    value: string;
+    onChange: (event: SelectChangeEvent<string>) => void;
+}
+
+const FieldSelect = ({ value, onChange }: FieldSelectProps) => {
     const [fields, setFields] = useState<string[]>([]);
-    const [field, setField] = useState<string>('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,18 +23,14 @@ const FieldSelect = () => {
         fetchData();
     }, []);
 
-    const handleChange = (event: SelectChangeEvent<string>) => {
-        setField(event.target.value);
-    };
-
     return (
         <FormControl sx={{ m: 1, minWidth: 200}}>
             <InputLabel id="field-select-label">Field</InputLabel>
             <Select
                 labelId="field-select-label"
                 id="field-select"
-                value={field}
-                onChange={handleChange}
+                value={value}
+                onChange={onChange}
                 label="Field"
             >
                 <MenuItem value="">

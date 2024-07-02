@@ -3,9 +3,27 @@ import { ReducedDigimon } from '../types/Digimon';
 
 const API_URL = '/api/v1';
 
+type FilterContextType = {
+    digimonName: string;
+    digimonLevel: string;
+    xAntibody: string;
+    digimonAttribute: string;
+};
+
 export const fetchCharacters = async (page: number): Promise<ReducedDigimon[]> => {
-    const response = await axios.get(`${API_URL}/digimon/?name=&page=${page}`);
-    return response.data.content; // Adjust to return the content array from response
+    const response = await axios.get(`${API_URL}/digimon/?name=&pageSize=10&page=${page}`);
+    return response.data.content;
+};
+
+export const fetchCharactersWithFilters = async (page: number, data: FilterContextType): Promise<ReducedDigimon[]> => {
+    let url = `${API_URL}/digimon/?pageSize=10&page=${page}`
+    if(data.digimonName) url += `&name=${data.digimonName}`;
+    if(data.digimonAttribute) url += `&attribute=${data.digimonAttribute}`;
+    if(data.digimonLevel) url += `&level=${data.digimonLevel}`;
+    if(data.xAntibody) url += `&xAntibody=${data.xAntibody}`;
+
+    const response = await axios.get(url);
+    return response.data.content;
 };
 
 export const fetchCharacterById = async (id: number) => {

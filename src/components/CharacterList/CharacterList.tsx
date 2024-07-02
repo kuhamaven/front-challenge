@@ -2,12 +2,28 @@ import React, {useState, useEffect, useRef} from 'react';
 import CharacterCard from '../CharacterCard/CharacterCard';
 import useFetchCharacters from '../../hooks/useFetchCharacters';
 import './CharacterList.css';
+import {useOutletContext} from "react-router-dom";
+import {CircularProgress} from "@mui/material";
+
+type FilterContextType = {
+    digimonName: string;
+    digimonLevel: string;
+    xAntibody: string;
+    digimonField: string;
+    digimonAttribute: string;
+};
 
 const CharacterList: React.FC = () => {
-    const {characters, loading, error, fetchNextPage} = useFetchCharacters();
+    const {characters, loading, error, fetchNextPage, resetFilters} = useFetchCharacters();
     const [isFetching, setIsFetching] = useState(false);
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const isFirstLoad = useRef(true); // Track first load
+    const filters = useOutletContext<FilterContextType>();
+
+    useEffect(() => {
+        resetFilters(filters)
+        setIsFetching(true)
+        window.scrollTo({top: 0, behavior: 'smooth'})
+    }, [filters]);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -16,9 +32,7 @@ const CharacterList: React.FC = () => {
 
     useEffect(() => {
         if (characters.length > 0 && isFetching) {
-            fetchNextPage().then(r => {
-                if (characters.length <= 10) window.scrollTo({top: 0, behavior: 'smooth'});
-            });
+            fetchNextPage()
             setIsFetching(false);
         }
     }, [characters, isFetching, fetchNextPage]);
@@ -48,7 +62,11 @@ const CharacterList: React.FC = () => {
             {characters.map((character) => (
                 <CharacterCard key={character.name} digimon={character}/>
             ))}
-            {loading && <div className="loading">Loading...</div>}
+            {loading && (
+                <div className="loading">
+                    <CircularProgress style={{ position: 'fixed', top: '84px', right: '20px', zIndex: '1000' }} />
+                </div>
+            )}
         </div>
     );
 };
