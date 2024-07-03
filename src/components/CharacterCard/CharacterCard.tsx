@@ -5,6 +5,7 @@ import { ReducedDigimon } from '../../types/Digimon';
 
 type Props = {
     digimon: ReducedDigimon;
+    view: string;
 }
 
 const CharacterCard = (props: Props) => {
@@ -54,21 +55,32 @@ const CharacterCard = (props: Props) => {
         transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
     };
 
-    return (
-        <div ref={cardRef} className={'card'} style={cardStyle}>
-            <div className={'card-name-details-link'}>
-                <div className={'card-name-text'}>{props.digimon.name}</div>
+    if(props.view === 'grid'){
+        return (
+            <div ref={cardRef} className={'card'} style={cardStyle}>
+                <div className={'card-name-details-link'}>
+                    <div className={'card-name-text'}>{props.digimon.name}</div>
+                </div>
+                <div className={'card-image'}>
+                    <img src={props.digimon.image} alt={props.digimon.name}/>
+                </div>
+                <div className={'card-name-details-link'}>
+                    <Link to={`/details/${props.digimon.id}`} className={'link'}>
+                        View Details
+                    </Link>
+                </div>
             </div>
-            <div className={'card-image'}>
-                <img src={props.digimon.image} alt={props.digimon.name}/>
-            </div>
-            <div className={'card-name-details-link'}>
+        );
+    } else {
+        return (
+            <div ref={cardRef} className={'card-list'}>
                 <Link to={`/details/${props.digimon.id}`} className={'link'}>
-                    View Details
+                    {props.digimon.name}
                 </Link>
             </div>
-        </div>
-    );
+        )
+    }
+
 };
 
 export default CharacterCard;

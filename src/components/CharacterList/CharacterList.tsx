@@ -4,6 +4,8 @@ import useFetchCharacters from '../../hooks/useFetchCharacters';
 import './CharacterList.css';
 import {useOutletContext} from "react-router-dom";
 import {CircularProgress} from "@mui/material";
+import {MdFormatListBulleted, MdGridView} from "react-icons/md";
+
 
 type FilterContextType = {
     digimonName: string;
@@ -18,6 +20,11 @@ const CharacterList: React.FC = () => {
     const [isFetching, setIsFetching] = useState(false);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const filters = useOutletContext<FilterContextType>();
+    const [viewMode, setViewMode] = useState('grid'); // Example state for view mode
+
+    const toggleViewMode = () => {
+        setViewMode(prevMode => prevMode === 'grid' ? 'list' : 'grid');
+    };
 
     useEffect(() => {
         resetFilters(filters)
@@ -61,20 +68,24 @@ const CharacterList: React.FC = () => {
     }
 
     return (
-        <div className="container" ref={containerRef}>
+        <div className={viewMode === 'grid' ? 'container-grid' : 'container-list'} ref={containerRef}>
             {characters.map((character) => (
-                <CharacterCard key={character.name} digimon={character}/>
+                <CharacterCard key={character.name} digimon={character} view={viewMode}/>
             ))}
+            <button className="floating-button" onClick={toggleViewMode}>
+                {viewMode === 'grid' ? <MdFormatListBulleted /> : <MdGridView />}
+            </button>
             {loading && (
                 <div className="loading">
                     <CircularProgress style={{
                         position: 'fixed',
                         top: '90%',
-                        left: '95%',
-                        transform: 'translate(-90%, -95%)',
+                        left: '3%',
+                        transform: 'translate(-90%, -3%)',
                         zIndex: '1000',
-                        scale:'2',
-                        color:'blue'}}
+                        scale: '2',
+                        color: 'blue'
+                    }}
                     />
                 </div>
             )}
