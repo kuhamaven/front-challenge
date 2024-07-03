@@ -31,9 +31,12 @@ const CharacterList: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        if (characters.length > 0 && isFetching) {
+        if (isFetching) {
             fetchNextPage()
             setIsFetching(false);
+        }
+        if(characters.length<=10){
+            window.scrollTo({top: 0, behavior: 'smooth'})
         }
     }, [characters, isFetching, fetchNextPage]);
 
@@ -64,7 +67,15 @@ const CharacterList: React.FC = () => {
             ))}
             {loading && (
                 <div className="loading">
-                    <CircularProgress style={{ position: 'fixed', top: '84px', right: '20px', zIndex: '1000' }} />
+                    <CircularProgress style={{
+                        position: 'fixed',
+                        top: '90%',
+                        left: '95%',
+                        transform: 'translate(-90%, -95%)',
+                        zIndex: '1000',
+                        scale:'2',
+                        color:'blue'}}
+                    />
                 </div>
             )}
         </div>

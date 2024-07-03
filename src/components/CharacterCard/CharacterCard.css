@@ -1,11 +1,16 @@
 .card {
     position: relative;
+    display: flex;
+    flex-direction: column;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 6px 6px 4px rgba(0, 0, 0, .5);
     overflow: hidden;
     text-align: center;
     transition: transform 0.2s;
+    max-width: 270px;
+    min-width: 270px;
+    max-height: 390px;
 }
 
 .card:hover {
@@ -35,31 +40,50 @@
     opacity: .3;
 }
 
-.card h2 {
-    font-size: 1.5rem;
-    margin: 16px 0;
-}
-
-.card img {
-    max-width: 100%;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-
-.card:hover img {
-    transform: translateY(-10px);
-}
-
 .card .link {
-    display: block;
     padding: 16px;
     color: #007bff;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card .link:hover {
     text-decoration: underline;
     color: #0056b3;
+}
+
+.card-name-details-link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.card-name-text {
+    white-space: nowrap;
+    overflow: clip;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    padding: 16px;
+    font-weight: bold;
+}
+
+.card-image {
+    flex: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 258px;
+}
+
+.card-image img {
+    max-height:  100%;
+    width: auto;
+    z-index: -1;
 }

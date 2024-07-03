@@ -17,10 +17,10 @@ export const fetchCharacters = async (page: number): Promise<ReducedDigimon[]> =
 
 export const fetchCharactersWithFilters = async (page: number, data: FilterContextType): Promise<ReducedDigimon[]> => {
     let url = `${API_URL}/digimon/?pageSize=10&page=${page}`
-    if(data.digimonName) url += `&name=${data.digimonName}`;
-    if(data.digimonAttribute) url += `&attribute=${data.digimonAttribute}`;
-    if(data.digimonLevel) url += `&level=${data.digimonLevel}`;
-    if(data.xAntibody) url += `&xAntibody=${data.xAntibody}`;
+    if(data.digimonName && data.digimonName.length >0) url += `&name=${data.digimonName}`;
+    if(data.digimonAttribute && data.digimonAttribute.length >0) url += `&attribute=${data.digimonAttribute}`;
+    if(data.digimonLevel && data.digimonLevel.length >0) url += `&level=${data.digimonLevel}`;
+    if(data.xAntibody && data.xAntibody.length >0) url += `&xAntibody=${data.xAntibody}`;
 
     const response = await axios.get(url);
     return response.data.content;

@@ -56,11 +56,17 @@ const CharacterCard = (props: Props) => {
 
     return (
         <div ref={cardRef} className={'card'} style={cardStyle}>
-            <h2>{props.digimon.name}</h2>
-            <img src={props.digimon.image} alt={props.digimon.name} />
-            <Link to={`/details/${props.digimon.id}`} className={'link'}>
-                View Details
-            </Link>
+            <div className={'card-name-details-link'}>
+                <div className={'card-name-text'}>{props.digimon.name}</div>
+            </div>
+            <div className={'card-image'}>
+                <img src={props.digimon.image} alt={props.digimon.name}/>
+            </div>
+            <div className={'card-name-details-link'}>
+                <Link to={`/details/${props.digimon.id}`} className={'link'}>
+                    View Details
+                </Link>
+            </div>
         </div>
     );
 };
