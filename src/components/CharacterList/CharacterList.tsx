@@ -5,6 +5,7 @@ import './CharacterList.css';
 import {useOutletContext} from "react-router-dom";
 import {CircularProgress} from "@mui/material";
 import {MdFormatListBulleted, MdGridView} from "react-icons/md";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 
 type FilterContextType = {
@@ -16,11 +17,12 @@ type FilterContextType = {
 };
 
 const CharacterList: React.FC = () => {
-    const {characters, loading, error, fetchNextPage, resetFilters} = useFetchCharacters();
+    const {characters, loading, error, fetchNextPage, resetFilters, reachedEnd} = useFetchCharacters();
     const [isFetching, setIsFetching] = useState(false);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const filters = useOutletContext<FilterContextType>();
     const [viewMode, setViewMode] = useState('grid'); // Example state for view mode
+    const size = useWindowSize();
 
     const toggleViewMode = () => {
         setViewMode(prevMode => prevMode === 'grid' ? 'list' : 'grid');
@@ -42,7 +44,7 @@ const CharacterList: React.FC = () => {
             fetchNextPage()
             setIsFetching(false);
         }
-        if(characters.length<=10){
+        if(characters.length<=10 && !reachedEnd){
             window.scrollTo({top: 0, behavior: 'smooth'})
         }
     }, [characters, isFetching, fetchNextPage]);

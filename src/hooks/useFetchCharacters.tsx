@@ -75,7 +75,7 @@ const useFetchCharacters = () => {
         fetchData();
     }, []); // Only run once on mount
 
-    return {characters, loading, error, fetchNextPage, resetFilters};
+    return {characters, loading, error, fetchNextPage, resetFilters, reachedEnd};
 };
 
 export default useFetchCharacters;
