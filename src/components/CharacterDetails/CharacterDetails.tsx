@@ -49,25 +49,25 @@ const CharacterDetails = () => {
                 <div className="left-column">
                     <h1>{character.name}</h1>
                     <img src={character.images[0].href} alt={character.name} />
-                    <div className="level">{character.levels[0].level}</div>
+                    <div className="level">{character.levels.length<=0? "No level available for this Digimon." : character.levels[0].level}</div>
                 </div>
                 <div className="right-column">
-                    <p>{character.descriptions[1].description}</p>
+                    <p>{character.descriptions.length<=1? "No description available for this Digimon." : character.descriptions[1].description}</p>
                 </div>
             </div>
             <div className="info-cards">
                 <div className="info-card">
                     <h2>Type</h2>
-                    <p>{character.types.map(t => t.type).join(', ')}</p>
+                    <p>{character.types.length<=0? "No types available for this Digimon." : character.types.map(t => t.type).join(', ')}</p>
                 </div>
                 <div className="info-card">
                     <h2>Attribute</h2>
-                    <p>{character.attributes.map(a => a.attribute).join(', ')}</p>
+                    <p>{character.attributes.length<=0? "No attributes available for this Digimon." : character.attributes.map(a => a.attribute).join(', ')}</p>
                 </div>
                 <div className="info-card">
                     <h2>Fields</h2>
                     <div className="fields">
-                        {character.fields.map(field => (
+                        {character.fields.length<=0? "No fields available for this Digimon." : character.fields.map(field => (
                             <img key={field.field} src={field.image} alt="field" />
                         ))}
                     </div>

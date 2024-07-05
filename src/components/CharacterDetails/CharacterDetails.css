@@ -4,7 +4,8 @@
     gap: 20px;
     padding: 20px;
     justify-content: center; /* Center the grid horizontally */
-    align-items: center; /* Center the grid vertically */
+    align-items: start; /* Align the grid items to the start vertically */
+    min-height: 100%; /* Ensure the grid takes full height */
 }
 
 .main-card {
@@ -14,14 +15,15 @@
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
     align-self: start; /* Align main card to the top */
+    height: 100%; /* Adjust to content height */
 }
 
 .main-card .left-column {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .main-card .left-column h1 {
@@ -45,6 +47,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-right: 30px;
 }
 
 .main-card .right-column p {
@@ -57,6 +60,8 @@
     flex-direction: column;
     gap: 20px;
     align-items: stretch; /* Ensure equal height for info-cards */
+    height: 100%; /* Match the height of the main card */
+    justify-content: space-between; /* Spread the cards evenly */
 }
 
 .info-card {
@@ -65,7 +70,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     text-align: center;
-    height: 100%; /* Fill the height of the container */
+    height: auto; /* Adjust to content height */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -93,4 +98,44 @@
     height: 40px;
     border-radius: 8px;
     object-fit: cover;
+}
+
+/* Responsive design for mobile view */
+@media (max-width: 768px) {
+    .character-details {
+        display: flex;
+        flex-direction: column; /* Stack main card and info cards vertically */
+        align-items: center; /* Center the content horizontally */
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .main-card {
+        grid-template-columns: 1fr; /* Single column for main card content */
+    }
+
+    .main-card .left-column {
+        align-items: center;
+        justify-content: flex-start; /* Align content to the top */
+    }
+
+    .info-cards {
+        flex-direction: row; /* Arrange info cards in a row */
+        flex-wrap: wrap; /* Wrap to new line if needed */
+        justify-content: center;
+        gap: 10px;
+        width: 100%; /* Ensure it takes full width */
+    }
+
+    .info-card {
+        width: calc(100% - 20px); /* Take full width minus some padding */
+        margin-bottom: 20px; /* Add some margin at the bottom */
+    }
+
+    .main-card .right-column {
+        justify-content: flex-start; /* Align content to the top */
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
 }
