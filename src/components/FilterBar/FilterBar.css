@@ -1,0 +1,31 @@
+.filters-floating-button {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.filters-floating-button:hover {
+    background-color: #0056b3;
+}
+
+.filters-box {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    box-shadow: 6px 6px 4px rgba(0, 0, 0, .5);
+    overflow: hidden;
+    text-align: center;
+}

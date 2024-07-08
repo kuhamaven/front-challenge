@@ -22,7 +22,6 @@ const CharacterList: React.FC = () => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const filters = useOutletContext<FilterContextType>();
     const [viewMode, setViewMode] = useState('grid'); // Example state for view mode
-    const size = useWindowSize();
 
     const toggleViewMode = () => {
         setViewMode(prevMode => prevMode === 'grid' ? 'list' : 'grid');
