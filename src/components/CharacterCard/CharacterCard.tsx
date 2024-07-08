@@ -60,6 +60,15 @@ const CharacterCard = (props: Props) => {
 
     const cardStyle: React.CSSProperties = {
         transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+        ...(isHovered && {
+            transform: `scale(1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+            boxShadow: '6px 6px 4px rgba(0, 0, 0, .8)',
+            zIndex: 1,
+        })
+    };
+
+    const cardAfterStyle: React.CSSProperties = {
+        opacity: isHovered ? 0.3 : 0,
     };
 
     useEffect(() => {
@@ -93,6 +102,7 @@ const CharacterCard = (props: Props) => {
     if (props.view === 'grid') {
         return (
             <div ref={cardRef} className={'card'} style={cardStyle} onClick={openDetails}>
+                <div className={'card-after'} style={cardAfterStyle}></div>
                 <div className={'card-name-details-link'}>
                     <div className={'card-name-text'}>{props.digimon.name}</div>
                 </div>
