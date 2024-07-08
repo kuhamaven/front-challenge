@@ -79,8 +79,13 @@ const CharacterCard = (props: Props) => {
             if (beta === null || gamma === null) return;
 
             const maxRotate = 60;
-            setRotateX((maxRotate * beta) / 90);
-            setRotateY((maxRotate * gamma) / 90);
+            if(isHovered){
+                setRotateX((maxRotate * beta) / 90);
+                setRotateY((maxRotate * gamma) / 90);
+            } else {
+                setRotateX(0);
+                setRotateY(0);
+            }
         };
 
         const detectScrollPosition = () => {
