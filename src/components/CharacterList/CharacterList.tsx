@@ -80,12 +80,12 @@ const CharacterList: React.FC = () => {
                 <div className="loading">
                     <CircularProgress style={{
                         position: 'fixed',
-                        top: '90%',
-                        left: '3%',
-                        transform: 'translate(-90%, -3%)',
+                        top: '15%',
+                        left: '50%',
+                        transform: 'translate(-15%, -50%)',
                         zIndex: '1000',
                         scale: '2',
-                        color: 'blue'
+                        color: '#00FFD8'
                     }}
                     />
                 </div>
