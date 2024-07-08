@@ -2,6 +2,7 @@ import React, {useRef, useState, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import './CharacterCard.css';
 import {ReducedDigimon} from '../../types/Digimon';
+import {useWindowSize} from "@uidotdev/usehooks";
 
 type Props = {
     digimon: ReducedDigimon;
@@ -14,6 +15,7 @@ const CharacterCard = (props: Props) => {
     const [rotateX, setRotateX] = useState(0);
     const [rotateY, setRotateY] = useState(0);
     const navigate = useNavigate()
+    const size = useWindowSize();
 
     const openDetails = () => {
         navigate(`/details/${props.digimon.id}`)
@@ -59,6 +61,34 @@ const CharacterCard = (props: Props) => {
     const cardStyle: React.CSSProperties = {
         transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
     };
+
+    useEffect(() => {
+        if (!cardRef.current || (size.width != null && size.width > 768) ) return;
+
+        const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+            const { beta, gamma } = event;
+            if (beta === null || gamma === null) return;
+
+            const maxRotate = 20;
+            setRotateX((maxRotate * beta) / 90);
+            setRotateY((maxRotate * gamma) / 90);
+        };
+
+        const detectScrollPosition = () => {
+            if (!cardRef.current) return;
+            const { top, height } = cardRef.current.getBoundingClientRect();
+            const isInView = top + height / 2 > window.innerHeight / 3 && top + height / 2 < (2 * window.innerHeight) / 3;
+            setIsHovered(isInView);
+        };
+
+        window.addEventListener('deviceorientation', handleDeviceOrientation);
+        window.addEventListener('scroll', detectScrollPosition);
+
+        return () => {
+            window.removeEventListener('deviceorientation', handleDeviceOrientation);
+            window.removeEventListener('scroll', detectScrollPosition);
+        };
+    }, [size]);
 
     if (props.view === 'grid') {
         return (
