@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useRef, useState, useEffect} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import './CharacterCard.css';
-import { ReducedDigimon } from '../../types/Digimon';
+import {ReducedDigimon} from '../../types/Digimon';
 
 type Props = {
     digimon: ReducedDigimon;
@@ -13,6 +13,11 @@ const CharacterCard = (props: Props) => {
     const [isHovered, setIsHovered] = useState(false);
     const [rotateX, setRotateX] = useState(0);
     const [rotateY, setRotateY] = useState(0);
+    const navigate = useNavigate()
+
+    const openDetails = () => {
+        navigate(`/details/${props.digimon.id}`)
+    }
 
     useEffect(() => {
         if (!cardRef.current) return;
@@ -20,7 +25,7 @@ const CharacterCard = (props: Props) => {
         const handleMouseMove = (event: MouseEvent) => {
             if (!isHovered || !cardRef.current) return;
 
-            const { left, top, width, height } = cardRef.current.getBoundingClientRect();
+            const {left, top, width, height} = cardRef.current.getBoundingClientRect();
             const x = (event.clientX - left) / width;
             const y = (event.clientY - top) / height;
 
@@ -55,9 +60,9 @@ const CharacterCard = (props: Props) => {
         transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
     };
 
-    if(props.view === 'grid'){
+    if (props.view === 'grid') {
         return (
-            <div ref={cardRef} className={'card'} style={cardStyle}>
+            <div ref={cardRef} className={'card'} style={cardStyle} onClick={openDetails}>
                 <div className={'card-name-details-link'}>
                     <div className={'card-name-text'}>{props.digimon.name}</div>
                 </div>
@@ -74,6 +79,9 @@ const CharacterCard = (props: Props) => {
     } else {
         return (
             <div ref={cardRef} className={'card-list'}>
+                <div className={'card-list-image'}>
+                    <img src={props.digimon.image} alt={props.digimon.name}/>
+                </div>
                 <Link to={`/details/${props.digimon.id}`} className={'link'}>
                     {props.digimon.name}
                 </Link>
