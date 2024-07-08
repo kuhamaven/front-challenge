@@ -78,7 +78,7 @@ const CharacterCard = (props: Props) => {
             const { beta, gamma } = event;
             if (beta === null || gamma === null) return;
 
-            const maxRotate = 20;
+            const maxRotate = 60;
             setRotateX((maxRotate * beta) / 90);
             setRotateY((maxRotate * gamma) / 90);
         };
